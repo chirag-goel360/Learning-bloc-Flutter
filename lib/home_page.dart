@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         child: StreamBuilder<List<Employee>>(
           stream: _employeeBloc.employeeListStream,
           builder: (context, AsyncSnapshot<List<Employee>> snapshot) {
-            if(snapshot.hasError || snapshot.data == null){
+            if (snapshot.hasError || snapshot.data == null) {
               return CircularProgressIndicator();
             }
             return ListView.builder(
@@ -60,7 +60,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Text(
-                              double.parse((snapshot.data[index].salary).toStringAsFixed(3)).toString(),
+                              parsedoubleText(
+                                snapshot.data[index].salary,
+                              ),
                               style: TextStyle(
                                 fontSize: 16.0,
                               ),
@@ -105,5 +107,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  String parsedoubleText(double value) {
+    return double.parse((value).toStringAsFixed(3)).toString();
   }
 }
